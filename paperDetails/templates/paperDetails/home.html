@@ -1,0 +1,22 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class = "container">
+    <div class = "header"><h3> Home </h3></div>
+    <div class = "content">
+        <div class="content-section">
+            <div class="media">
+              <img class="rounded-circle account-img" src="{{ user.profile.profile_pic.url }}">
+              <div class="media-body">
+                <h2 class="account-heading">{{ user.profile.organisationName }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+              </div>
+            </div>
+        <div class = "content-section">
+            To see information of your faculty members <a href="{% url 'facultyList' %}"><button class = "btn btn-outline-info" >click here</button> </a>
+        </div>
+        <div class = "content-section">
+            To update your organisation's information  <a href="{%url 'updatePage' %}"><button class = "btn btn-outline-info" >click here</button> </a>
+        </div>  
+    </div>
+</div>
+{% endblock content %}
