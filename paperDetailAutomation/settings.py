@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import django_heroku
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -141,3 +141,4 @@ LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+django_heroku.settings(locals())
