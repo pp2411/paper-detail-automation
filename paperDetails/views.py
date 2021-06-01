@@ -86,7 +86,7 @@ def updateInBulk(request):
 
 @login_required
 def downloadFormat(request):
-    fl_path = 'staticfiles\Format\Format.csv'
+    fl_path = 'media\Format\Format.csv'
     filename = 'format.csv'
     fl = open(fl_path, 'r')
     mime_type, _ = mimetypes.guess_type(fl_path)
