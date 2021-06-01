@@ -98,7 +98,7 @@ def downloadFormat(request):
 def downloadPapers(request):
     organisation = request.user.profile
     authors = Faculty.objects.filter(organisation=organisation)
-    queryset = Paper.objects.filter(author__in  = authors).order_by("author" ,"year")
+    queryset = Paper.objects.filter(author__in  = authors).order_by("author" ,"noOfYr")
     dataset = PaperResource().export(queryset)
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="FacultyDetails.csv"'
@@ -115,19 +115,19 @@ class FacultyListView(ListView, LoginRequiredMixin):
         return queryset
     
 
-class FacultyDetailsView( LoginRequiredMixin, UserPassesTestMixin, DetailView):
-    model = Faculty
-    paginate_by = 5
-    def test_func(self):
-        faculty = self.get_object()
-        return self.request.user == faculty.organisation.user
+# class FacultyDetailsView( LoginRequiredMixin, UserPassesTestMixin, DetailView):
+#     model = Faculty
+#     paginate_by = 5
+#     def test_func(self):
+#         faculty = self.get_object()
+#         return self.request.user == faculty.organisation.user
             
 
-    def get_context_data(self, **kwargs):
-        print(self.kwargs['pk'])
-        context = super().get_context_data(**kwargs)
-        context['papers'] = Paper.objects.filter(author=context['object'].id).order_by('year')
-        return context
+#     def get_context_data(self, **kwargs):
+#         print(self.kwargs['pk'])
+#         context = super().get_context_data(**kwargs)
+#         context['papers'] = Paper.objects.filter(author=context['object'].id).order_by('noOfYr')
+#         return context
 
 class PaperDetailsView(LoginRequiredMixin , UserPassesTestMixin , ListView):
     template_name = 'paperDetails\Faculty_detail.html'

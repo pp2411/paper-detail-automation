@@ -8,5 +8,5 @@ class FacultyResource(resources.ModelResource):
 class PaperResource(resources.ModelResource):
     class Meta:
         model = Paper
-        fields = ('author__name', 'title' , 'link', 'authors' ,'publication', 'noOfCitations' , 'year')
-        export_order = ('author__name' , 'title' , 'authors' , 'publication' , 'year' , 'noOfCitations', 'link')
+        fields = ('author__name', 'title' , 'link', 'authors' ,'publication', 'noOfCitations' , 'noOfYr')
+        export_order = ('author__name' , 'title' , 'authors' , 'publication' , 'noOfYr' , 'noOfCitations', 'link')
