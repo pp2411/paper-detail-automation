@@ -86,7 +86,7 @@ def updateInBulk(request):
 
 @login_required
 def downloadFormat(request):
-    fl_path = 'media\Format\Format.csv'
+    fl_path = 'media/Format/Format.csv'
     filename = 'format.csv'
     fl = open(fl_path, 'r')
     mime_type, _ = mimetypes.guess_type(fl_path)
@@ -106,7 +106,7 @@ def downloadPapers(request):
 
 
 class FacultyListView(ListView, LoginRequiredMixin):
-    template_name = 'paperDetails\FacultyList.html'
+    template_name = 'paperDetails/FacultyList.html'
     context_object_name = 'faculties'
     paginate_by = 5
     def get_queryset(self):
@@ -130,7 +130,7 @@ class FacultyListView(ListView, LoginRequiredMixin):
 #         return context
 
 class PaperDetailsView(LoginRequiredMixin , UserPassesTestMixin , ListView):
-    template_name = 'paperDetails\Faculty_detail.html'
+    template_name = 'paperDetails/Faculty_detail.html'
     paginate_by = 5
     context_object_name = 'papers'
     def test_func(self):
