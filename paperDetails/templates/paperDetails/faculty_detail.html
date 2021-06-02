@@ -7,13 +7,13 @@
       <div class="media-body">
         <div class="article-metadata">
           <a class="mr-2" href="#">{{ object.name }}</a>
-          <small class="text-muted">{{ obj.noOfYr }}</small>
+          <small class="text-muted">{{ obj.year }}</small>
         </div>
         <h3 class="article-title"><a target="_blank" class="mr-2" href="{{obj.link}}">{{ obj.title }}</a></h3>
         <p class="article-content">{{ obj.authors}}</p>
         <p class="article-content">{{ obj.publication}}</p>
         {% if obj.noOfCitations is not none %}<p class="article-content">Cited by: <a target="_blank" href = {{obj.citation_link}}>{{ obj.noOfCitations}}</a></p>{% endif %}
-        <p class="article-content">Year: {{ obj.noOfYr}}</p>
+        <p class="article-content">Year: {{ obj.year}}</p>
       </div>
     </article>
   {% endfor %}

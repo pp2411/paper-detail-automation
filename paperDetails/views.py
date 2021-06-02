@@ -86,7 +86,7 @@ def updateInBulk(request):
 
 @login_required
 def downloadFormat(request):
-    fl_path = 'media/Format/Format.csv'
+    fl_path = 'media\Format\Format.csv'
     filename = 'format.csv'
     fl = open(fl_path, 'r')
     mime_type, _ = mimetypes.guess_type(fl_path)
@@ -98,7 +98,7 @@ def downloadFormat(request):
 def downloadPapers(request):
     organisation = request.user.profile
     authors = Faculty.objects.filter(organisation=organisation)
-    queryset = Paper.objects.filter(author__in  = authors).order_by("author" ,"noOfYr")
+    queryset = Paper.objects.filter(author__in  = authors).order_by("author" ,"year")
     dataset = PaperResource().export(queryset)
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="FacultyDetails.csv"'
@@ -106,7 +106,7 @@ def downloadPapers(request):
 
 
 class FacultyListView(ListView, LoginRequiredMixin):
-    template_name = 'paperDetails/FacultyList.html'
+    template_name = 'paperDetails\FacultyList.html'
     context_object_name = 'faculties'
     paginate_by = 5
     def get_queryset(self):
@@ -115,22 +115,22 @@ class FacultyListView(ListView, LoginRequiredMixin):
         return queryset
     
 
-# class FacultyDetailsView( LoginRequiredMixin, UserPassesTestMixin, DetailView):
-#     model = Faculty
-#     paginate_by = 5
-#     def test_func(self):
-#         faculty = self.get_object()
-#         return self.request.user == faculty.organisation.user
+class FacultyDetailsView( LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = Faculty
+    paginate_by = 5
+    def test_func(self):
+        faculty = self.get_object()
+        return self.request.user == faculty.organisation.user
             
 
-#     def get_context_data(self, **kwargs):
-#         print(self.kwargs['pk'])
-#         context = super().get_context_data(**kwargs)
-#         context['papers'] = Paper.objects.filter(author=context['object'].id).order_by('noOfYr')
-#         return context
+    def get_context_data(self, **kwargs):
+        print(self.kwargs['pk'])
+        context = super().get_context_data(**kwargs)
+        context['papers'] = Paper.objects.filter(author=context['object'].id).order_by('year')
+        return context
 
 class PaperDetailsView(LoginRequiredMixin , UserPassesTestMixin , ListView):
-    template_name = 'paperDetails/Faculty_detail.html'
+    template_name = 'paperDetails\Faculty_detail.html'
     paginate_by = 5
     context_object_name = 'papers'
     def test_func(self):

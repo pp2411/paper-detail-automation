@@ -44,10 +44,10 @@ def scrapeAndUpdate(name , faculty):
                     noOfCitations = 0
 
                 if year>0 and noOfCitations>0:
-                    paperObj = Paper(author = author , title = title, link = link, authors = authors, publication = publication, noOfCitations = noOfCitations, citation_id = citation_id, citation_link = citation_link, noOfYr = year)
+                    paperObj = Paper(author = author , title = title, link = link, authors = authors, publication = publication, noOfCitations = noOfCitations, citation_id = citation_id, citation_link = citation_link, year = year)
                 
                 elif year>0:
-                    paperObj = Paper(author = author , title = title, link = link, authors = authors, publication = publication, noOfYr = year)
+                    paperObj = Paper(author = author , title = title, link = link, authors = authors, publication = publication, year = year)
                 elif noOfCitations>0:
                     paperObj = Paper(author = author , title = title, link = link, authors = authors, publication = publication, noOfCitations = noOfCitations, citation_id = citation_id, citation_link = citation_link)
                 else:
